@@ -1,0 +1,205 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Pastéis",
+        "description": "Essa API tem como objetivo a criação de pastéis",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080/",
+            "description": "API de teste"
+        }
+    ],
+    "paths": {
+        "/create": {
+            "post": {
+                "summary": "Cadastro de pastél",
+                "description": "Essa rota será responsável pelo cadastro de novos pastéis",
+                "tags": [
+                    "Pastél"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Pastél"
+                            },
+                            "examples": {
+                                "product": {
+                                    "value": {
+                                        "pastel_type": "Pastél de Queijo",
+                                        "pastel_price": 3.99
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Pastél"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Product Already Exists"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/{id}": {
+            "get": {
+                "summary": "Busca de um pastél pelo ID",
+                "description": "Buscar um pastél cadastrado pelo ID",
+                "tags": [
+                    "Pastél"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do produto",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Pastél"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/": {
+            "get": {
+                "summary": "Busca de todos os pastéis cadastrados",
+                "description": "Buscar todos os pastéis cadastrados",
+                "tags": [
+                    "Pastél"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Pastél"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/delete/{id}": {
+            "delete": {
+                "summary": "Deletar um pastél pelo ID",
+                "description": "Deletar um pastél pelo ID no DB",
+                "tags": [
+                    "Pastél"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do produto",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Pastél"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/update/{id}": {
+            "put": {
+                "summary": "Atualização de dados do Pastél pelo ID",
+                "description": "Atualização de dados do Pastél",
+                "tags": [
+                    "Pastél"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do produto",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Pastél"
+                            },
+                            "examples": {
+                                "product": {
+                                    "value": {
+                                        "pastel_type": "Pastél de Queijo",
+                                        "pastel_price": 3.99
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Pastél"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Pastél": {
+                "type": "object",
+                "properties": {
+                    "pastel_type": {
+                        "type": "string"
+                    },
+                    "pastel_price": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}
