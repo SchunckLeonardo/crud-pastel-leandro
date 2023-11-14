@@ -11,5 +11,5 @@ let Pastel = connection.define("pastel", {
     }
 })
 
-PastelModel.sync({force: false})
+Pastel.sync({force: false})
 module.exports = Pastel
